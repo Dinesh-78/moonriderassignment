@@ -1,46 +1,66 @@
-🔧 Setup Instructions
-1. Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/your-username/identity-reconciliation.git
-cd identity-reconciliation
-2. Install Dependencies
-bash
-Copy
-Edit
-npm install
-3. Set Up Environment
-Create a .env file:
+# 🕵️‍♂️ Identity Reconciliation Service – Zamazon & Moonrider
 
-env
-Copy
-Edit
+This project is a backend service built to **intelligently identify and link contacts** (emails and phone numbers) across multiple purchase records. It was built for the fictional integration between Zamazon.com and Moonrider's advanced personalization engine, aimed at handling **shadow identities** like those of Doc Chandrashekar.
+
+---
+
+## 📌 Features
+
+- **/identify** endpoint for contact reconciliation.
+- Smart detection of matching emails or phone numbers.
+- Handles creation of `primary` and `secondary` contacts.
+- Automatically updates links when overlaps are detected.
+- Maintains `primaryContactId`, `emails`, `phoneNumbers`, and `secondaryContactIds`.
+
+---
+
+## 🗂️ Tech Stack
+
+- **Node.js / Express** – RESTful API
+- **Prisma ORM** – PostgreSQL database ORM
+- **PostgreSQL** – Database
+- **TypeScript / JavaScript** – Language
+- **Jest** (Bonus) – Unit testing
+- **Docker** (Optional) – For containerized development
+
+---
+
+## 🔧 Setup Instructions
+
+### 1. Clone the Repository
+
+bash
+git clone https://github.com/Dinesh-78/identity-reconciliation.git
+cd identity-reconciliation
+
+### 2. Install Dependencies
+
+npm install
+
+### 3. Set Up Environment
+
 DATABASE_URL="postgresql://user:password@localhost:5432/identity_db"
-4. Run Migrations
-bash
-Copy
-Edit
+
+### 4. Run Migrations
+
 npx prisma migrate dev --name init
-5. Start the Server
-bash
-Copy
-Edit
+
+### 5. start the Server
+
 npm run dev
+
 🎯 API Usage
 Endpoint: POST /identify
 Request Body
-json
-Copy
-Edit
+
 {
   "email": "doc@example.com",
   "phoneNumber": "1234567890"
 }
+
+
 Response Body
-json
-Copy
-Edit
+
 {
   "contact": {
     "primaryContactId": 1,
@@ -49,22 +69,8 @@ Edit
     "secondaryContactIds": [2, 3]
   }
 }
-🧠 Logic Summary
-If no match → create primary contact.
 
-If email or phoneNumber matches existing → create secondary and link to primary.
-
-If existing contacts conflict (both primary) → merge into one canonical primary.
-
-All linked contacts update dynamically, ensuring centralized identity.
-
-✅ Bonus Implementations
-🧪 Covert Unit Tests using Jest.
-
-🔄 Optimized queries with Prisma indexes.
-
-🔐 Misdirecting error handler returning minimal info.
 
 📹 Demo Video
 Check out the working video demo and code explanation:
-🎥 Video Link Here
+
